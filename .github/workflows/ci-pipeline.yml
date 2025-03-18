@@ -37,6 +37,11 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4  # Pull the latest code
+
+      - name: Get Short Commit SHA
+        run: echo "SHORT_SHA=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
 
       - name: Setup SSH Key
         run: |
@@ -61,4 +66,4 @@ jobs:
       - name: Commit & Push Changes
         run: |
           ls -la
-          cat deployment.yaml
+          pwd
