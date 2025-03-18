@@ -30,4 +30,4 @@ jobs:
         run: docker build -t bhupendrargoud/sensy:latest .
 
       - name: Push Docker Image
-        run: docker push bhupendrargoud/sensy:latest .
+        run: docker push bhupendrargoud/sensy:latest
