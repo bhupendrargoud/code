@@ -27,7 +27,9 @@ jobs:
           password: ${{ secrets.DOCKER_HUB_PASSWORD }}
 
       - name: Build Docker Image
-        run: docker build -t bhupendrargoud/sensy:latest .
+        run: |
+         docker build -t bhupendrargoud/sensy:latest .
+         docker tag bhupendrargoud/sensy:latest bhupendrargoud/sensy:${{ env.SHORT_SHA }}
 
       - name: Push Docker Image
-        run: docker push bhupendrargoud/sensy:latest
+        run: docker push bhupendrargoud/sensy:${{ env.SHORT_SHA }}
