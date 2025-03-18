@@ -61,6 +61,7 @@ jobs:
       - name: Update Image Tag in Deployment YAML
         run: |
           cd infra/manifests/code
+          ls -la
           python update_image.py -v bhupendrargoud/sensy:${{ env.SHORT_SHA }} 
 
       - name: Commit & Push Changes
