@@ -67,4 +67,9 @@ jobs:
       - name: Commit & Push Changes
         run: |
           ls -la
-          pwd
+          cd infra
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add deployment.yaml
+          git commit -m "image tag : ${{ env.SHORT_SHA }}"
+          git push origin main
