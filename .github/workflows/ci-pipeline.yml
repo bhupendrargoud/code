@@ -68,8 +68,9 @@ jobs:
         run: |
           ls -la
           cd infra
+          ls -la
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
-          git add deployment.yaml
+          git add manifests/code/deployment.yaml
           git commit -m "image tag : ${{ env.SHORT_SHA }}"
           git push origin main
