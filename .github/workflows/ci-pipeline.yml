@@ -49,11 +49,16 @@ jobs:
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan github.com >> ~/.ssh/known_hosts
+      - name :  git config
+        run : |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
 
       - name: Checkout Deployment Repo
         run: |
           git clone -b master git@github.com:bhupendrargoud/infra.git
           ls -la
+          
 
       - name: Set Python Environment
         run: python -m pip install --upgrade pip pyyaml
@@ -64,13 +69,6 @@ jobs:
           ls -la
           python update_image.py -v bhupendrargoud/sensy:${{ env.SHORT_SHA }} 
 
-      - name: Commit & Push Changes
-        run: |
-          ls -la
-          cd infra
-          ls -la
-          git config user.name "GitHub Actions"
-          git config user.email "actions@github.com"
-          git add manifests/code/deployment.yaml
+          git add deployment.yaml
           git commit -m "image tag : ${{ env.SHORT_SHA }}"
-          git push origin main
+          git push origin master
