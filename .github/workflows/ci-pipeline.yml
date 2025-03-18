@@ -37,6 +37,14 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
+
+      - name: Setup SSH Key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+          
       - name: Checkout Deployment Repo
         run: git clone -b master git@github.com:bhupendrargoud/infra.git
 
