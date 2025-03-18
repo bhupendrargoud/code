@@ -49,6 +49,8 @@ jobs:
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan github.com >> ~/.ssh/known_hosts
+          git config --global user.email "bhupendrargoud@gmail.com"
+          git config --global user.name "Bhupendra R"
 
       - name: Checkout Deployment Repo
         run: |
@@ -67,6 +69,4 @@ jobs:
 
           git add deployment.yaml
           git commit -m "image tag : ${{ env.SHORT_SHA }}"
-          git config --global user.email "bhupendrargoud@gmail.com"
-          git config --global user.name "Bhupendra R"
           git push origin master
