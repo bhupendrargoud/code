@@ -48,7 +48,6 @@ jobs:
       - name: Checkout Deployment Repo
         run: |
           git clone -b master git@github.com:bhupendrargoud/infra.git
-          pwd
           ls -la
 
       - name: Set Python Environment
@@ -56,10 +55,10 @@ jobs:
 
       - name: Update Image Tag in Deployment YAML
         run: |
-          cd infra
-          python update_image.py -v bhupendrargoud/sensy:${{ env.SHORT_SHA }} \
-          -r git@github.com:bhupendrargoud/infra.git
+          cd infra/manifests/code
+          python update_image.py -v bhupendrargoud/sensy:${{ env.SHORT_SHA }} 
 
       - name: Commit & Push Changes
         run: |
           ls -la
+          cat deployment.yaml
